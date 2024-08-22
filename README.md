@@ -1,3 +1,7 @@
+#Leaderboard APP
+
+![leader-board](https://github.com/user-attachments/assets/80d8a119-5814-4025-ad7c-0e0b29b7defe)
+
 ## Introduction
 This README file provides an overview of Leaderboard application, including installation instructions, usage guidelines, and important information for developers.
 
