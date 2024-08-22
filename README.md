@@ -58,7 +58,7 @@ Author: Jiffin Joachim Gomez (jiffingomez@gmail.com)
 
 ### Additional Notes
 Environment Variables: Refer to the .env.example file for a list of available environment variables and their descriptions.
-Routing: The application's routes are defined in routes/web.php.
+Routing: The application's routes are defined in routes/web.php, routes/api.php.
 Controllers: Controllers are located in the app/Http/Controllers directory.
 Views: Blade templates are stored in the resources/views directory.
 
