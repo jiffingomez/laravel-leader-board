@@ -7,6 +7,10 @@ This README file provides an overview of Leaderboard application, including inst
 
 Author: Jiffin Joachim Gomez (jiffingomez@gmail.com)
 
+### Dependencies
+PHP version 8.2  
+Laravel Framework 11.21.0  
+SQLite
 ### Installation
 1. Clone the Repository:
   
