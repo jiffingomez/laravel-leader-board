@@ -18,6 +18,10 @@
         align-items: center;
         z-index: 9999; /* Ensure it appears on top */
     }
+    body {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
@@ -38,7 +42,39 @@
         <tbody id="leaderboard-table">
         </tbody>
     </table>
-
+    <div class="d-flex justify-content-end">
+    <button class="btn btn-primary float-right" data-bs-toggle="modal" data-bs-target="#addUserModal">Add User</button>
+    </div>
+    <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addUserModalLabel">Add User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addUserForm">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="age" class="form-label">Age</label>
+                            <input type="number" class="form-control" id="age" name="age" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="address" name="address" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveUserButton">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="modal fade" id="leaderModal" tabindex="-1" aria-labelledby="leaderModalLabel" aria-hidden="true">
@@ -70,6 +106,8 @@
         </div>
     </div>
 </div>
+
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/axios@0.27.2/dist/axios.min.js"></script>
@@ -218,6 +256,54 @@
 
     }
 
+</script>
+
+<script>
+    // Attach event listener to the Add User button
+    const saveUserButton = document.getElementById('saveUserButton');
+    saveUserButton.addEventListener('click', () => {
+
+        const form = document.getElementById('addUserForm');
+        // Validate the form
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+            form.classList.add('was-validated');
+        } else {
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+            const address = document.getElementById('address').value;
+
+            // Create the data object
+            const data = {
+                name: name,
+                age: age,
+                address: address
+            };
+            const addUserModal = document.getElementById('addUserModal');
+            const modal = bootstrap.Modal.getInstance(addUserModal);
+
+            // Send the POST request to the API
+            axios.post('http://laravel-leader-board.test/api/leader/create', data)
+                .then(response => {
+                    // Handle successful response
+                    // Close the modal
+                    modal.hide();
+                    alert('User added successfully!');
+
+                    location.reload();
+                    console.log('User added successfully:', response.data);
+                    // You can show a success message or reload the page here
+                })
+                .catch(error => {
+                    // Handle error response
+                    // Close the modal
+                    modal.hide();
+                    alert('Error adding User!');
+                    console.error('Error adding user:', error);
+                });
+        }
+    });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
