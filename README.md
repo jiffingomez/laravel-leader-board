@@ -73,7 +73,8 @@ Submit a Pull Request: Submit a pull request to the main repository, describing 
 
 ### Additional Information
 Documentation: http://laravel-leader-board.test/api/documentation#/Leaderboard  
-  
-![swagger](https://github.com/user-attachments/assets/5f10afe7-b4e6-44d0-ac40-6c7abbd87ec5)
+
+  ![Screenshot 2024-08-22 220502](https://github.com/user-attachments/assets/37463975-0002-47db-8cb1-e081e230becf)
+
 
 Contact: jiffingomez@gmail.com
