@@ -31,11 +31,6 @@ class LeaderBoardController extends Controller
     }
 
     /**
-     * This function is used to add new leaders
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    /**
      * @OA\Post(
      *     path="/api/leader/create",
      *     tags={"Leaderboard"},

@@ -4,6 +4,7 @@ use App\Http\Controllers\LeaderBoardController;
 use Illuminate\Support\Facades\Route;
 
 
+// APIs Related to Leaderboard APP
 
 Route::get('leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard');
 Route::get('leader/points/reset', [LeaderboardController::class, 'reset_points'])->name('reset_points');
