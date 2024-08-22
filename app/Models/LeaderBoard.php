@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class LeaderBoard extends Model
 {
@@ -20,4 +21,14 @@ class LeaderBoard extends Model
         'points',
         'address',
     ];
+
+    /**
+     * Get the winner boards associated with this leaderboard.
+     *
+     * @return HasMany
+     */
+    public function winnerBoards(): HasMany
+    {
+        return $this->hasMany(WinnerBoard::class);
+    }
 }

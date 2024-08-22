@@ -50,6 +50,7 @@ class LeaderBoardController extends Controller
     public function show(int $id): \Illuminate\Http\JsonResponse
     {
         $leader = LeaderBoard::find($id);
+
         if (is_null($leader)) {
             return response()->json(["success" => false, "message" => "Leader board not found."]);
         } else {
@@ -95,6 +96,7 @@ class LeaderBoardController extends Controller
 //        $id = $request->input('id');
         if (LeaderBoard::where('id', $id)->exists()) {
             $leader = LeaderBoard::find($id);
+//            $leader->winner_boards(->delete();
             $leader->delete();
             return response()->json(["success" => true, "message" => "Leader deleted successfully."]);
         }

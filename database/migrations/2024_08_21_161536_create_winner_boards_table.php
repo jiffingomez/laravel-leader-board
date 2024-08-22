@@ -18,7 +18,11 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('leaderboard_id')->references('id')->on('leader_boards');
+            $table->foreign('leaderboard_id')
+                ->references('id')
+                ->on('leader_boards')
+                ->onDelete('cascade');
+            ;
         });
     }
 
