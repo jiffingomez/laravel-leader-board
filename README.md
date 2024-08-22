@@ -1,4 +1,4 @@
-#Leaderboard APP
+# Leaderboard APP
 
 ![leader-board](https://github.com/user-attachments/assets/80d8a119-5814-4025-ad7c-0e0b29b7defe)
 
@@ -72,6 +72,8 @@ Submit a Pull Request: Submit a pull request to the main repository, describing 
 
 
 ### Additional Information
-
 Documentation: http://laravel-leader-board.test/api/documentation#/Leaderboard  
+  
+![swagger](https://github.com/user-attachments/assets/5f10afe7-b4e6-44d0-ac40-6c7abbd87ec5)
+
 Contact: jiffingomez@gmail.com
