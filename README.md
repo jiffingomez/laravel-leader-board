@@ -37,27 +37,31 @@ SQLite
   
     php artisan migrate:refresh --seed
 
+5. Run the below command to seed the data
+  
 
-5. Command to reset leader board points to zero
+    php artisan db:seed --class=LeaderBoardSeeder
+
+6. Command to reset leader board points to zero
   
 
     php artisan app:reset-leader-board-points
 
-6. Run the queue (Optional)
+7. Run the queue (Optional)
   
 
     php artisan queue:work
 
-7. Run the job (Optional)
+8. Run the job (Optional)
   
 
     php artisan schedule:work
 
-8. Start the Development Server:
+9. Start the Development Server:
 
 
     php artisan serve
-9. Access the Application:
+10. Access the Application:
   
 
     Open your web browser and navigate to http://localhost:8000.
