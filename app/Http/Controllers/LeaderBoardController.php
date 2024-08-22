@@ -6,13 +6,22 @@ use App\Jobs\QRCodeGenerator;
 use App\Models\LeaderBoard;
 use App\Models\WinnerBoard;
 use GuzzleHttp\Client;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+
+/**
+ * @OA\Info(title="LeaderBoard APIs", version="0.1")
+ */
 
 class LeaderBoardController extends Controller
 {
-    /**
-     * This function is used to return leaderboard
-     * @return \Illuminate\Http\JsonResponse
+   /**
+     * @OA\Get(
+     *     path="/api/leaderboard",
+     *     tags={"Leaderboard"},
+     *     summary="Get a list of leaders sorted by points in descending",
+     *     @OA\Response(response="200", description="Leaders Fetched Successfully")
+     * )
      */
     public function index(): \Illuminate\Http\JsonResponse
     {
@@ -25,6 +34,25 @@ class LeaderBoardController extends Controller
      * This function is used to add new leaders
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
+     */
+    /**
+     * @OA\Post(
+     *     path="/api/leader/create",
+     *     tags={"Leaderboard"},
+     *     summary="To create a new user",
+     *  @OA\RequestBody(required=true,
+     *     @OA\MediaType(mediaType="application/json",
+     *        @OA\Schema(required={"name", "age", "address"},
+     *           @OA\Property(property="name",description="name",type="string", default="Jiffin"),
+     *           @OA\Property(property="age",description="age",type="integer", default="33"),
+     *           @OA\Property(property="address",description="address",type="string"),
+     *          ),),),
+     *  @OA\Response(response=200, description="User point updated successfully.",
+     *     @OA\MediaType(mediaType="application/json"),),
+     * ))
+     * Update Points
+     * @param Request $request
+     * @return JsonResponse
      */
     public function store(Request $request): \Illuminate\Http\JsonResponse
     {
@@ -43,27 +71,44 @@ class LeaderBoardController extends Controller
         return response()->json(["success" => true, "data" => $leader, "message" => "Leader created."]);
     }
 
+
     /**
-     * This function is used to get a leader details
-     * @param int $id
-     * @return \Illuminate\Http\JsonResponse
+     * @OA\Get(
+     *     path="/api/leader/show/{id}",
+     *     tags={"Leaderboard"},
+     *     summary="To get the details of a leader",
+     *     @OA\Parameter(name="id", in="path", description="leader id", required=true, @OA\Schema(type="integer")),
+     *     @OA\Response(response="200", description="Leader Details Fetched Successfully")
+     * )
      */
     public function show(int $id): \Illuminate\Http\JsonResponse
     {
         $leader = LeaderBoard::find($id);
 
         if (is_null($leader)) {
-            return response()->json(["success" => false, "message" => "Leader board not found."]);
+            return response()->json(["success" => false, "message" => "Leader not found."]);
         } else {
-            return response()->json(["success" => true, "data" => $leader, "message" => "Leader board retrieved successfully."]);
+            return response()->json(["success" => true, "data" => $leader, "message" => "Leader retrieved successfully."]);
         }
     }
 
     /**
-     * This function is used to update points
+     * @OA\Post(
+     *     path="/api/leader/point",
+     *     tags={"Leaderboard"},
+     *     summary="To update a point of user (increment/decrement points)",
+     *  @OA\RequestBody(required=true,
+     *     @OA\MediaType(mediaType="application/json",
+     *        @OA\Schema(required={"id", "mode"},
+     *           @OA\Property(property="id",description="leader-board-id",type="integer"),
+     *           @OA\Property(property="mode",description="increment or decrement",type="string",default="increment"),
+     *          ),),),
+     *  @OA\Response(response=200, description="User point updated successfully.",
+     *     @OA\MediaType(mediaType="application/json"),),
+     * ))
+     * Update Points
      * @param Request $request
-     * @param int $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function point_update(Request $request): \Illuminate\Http\JsonResponse
     {
@@ -82,7 +127,7 @@ class LeaderBoardController extends Controller
                 }
             }
             $leader->save();
-            return response()->json(["success" => true, "message" => "Leader board updated successfully."]);
+            return response()->json(["success" => true, "message" => "User point updated successfully."]);
         }
         return response()->json(["success" => false, "message" => "Leader not found."]);
     }
@@ -97,7 +142,6 @@ class LeaderBoardController extends Controller
 //        $id = $request->input('id');
         if (LeaderBoard::where('id', $id)->exists()) {
             $leader = LeaderBoard::find($id);
-//            $leader->winner_boards(->delete();
             $leader->delete();
             return response()->json(["success" => true, "message" => "Leader deleted successfully."]);
         }
@@ -105,8 +149,12 @@ class LeaderBoardController extends Controller
     }
 
     /**
-     * This function is reset points to 0
-     * @return \Illuminate\Http\JsonResponse
+     * @OA\Get(
+     *     path="/api/leader/points/reset",
+     *     tags={"Leaderboard"},
+     *     summary="To reset all users points to zero",
+     *     @OA\Response(response="200", description="Points reset successfully.")
+     * )
      */
     public function reset_points(): \Illuminate\Http\JsonResponse
     {
@@ -115,8 +163,12 @@ class LeaderBoardController extends Controller
     }
 
     /**
-     * This function is used to return grouped data
-     * @return \Illuminate\Http\JsonResponse
+     * @OA\Get(
+     *     path="/api/leader/scores",
+     *     tags={"Leaderboard"},
+     *     summary="To group by points and show the average age of grouped users",
+     *     @OA\Response(response="200", description="Group By Scores retrieved Successfully")
+     * )
      */
     public function grouped_by_scores(): \Illuminate\Http\JsonResponse
     {

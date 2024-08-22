@@ -1,12 +1,9 @@
 <?php
 
 use App\Http\Controllers\LeaderBoardController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+
 
 Route::get('leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard');
 Route::get('leader/points/reset', [LeaderboardController::class, 'reset_points'])->name('reset_points');

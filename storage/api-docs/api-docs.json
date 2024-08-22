@@ -1,0 +1,172 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "LeaderBoard APIs",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/leaderboard": {
+            "get": {
+                "tags": [
+                    "Leaderboard"
+                ],
+                "summary": "Get a list of leaders sorted by points in descending",
+                "operationId": "92e29f56f2193baa1a8d4581d6e8b12c",
+                "responses": {
+                    "200": {
+                        "description": "Leaders Fetched Successfully"
+                    }
+                }
+            }
+        },
+        "/api/leader/create": {
+            "post": {
+                "tags": [
+                    "Leaderboard"
+                ],
+                "summary": "To create a new user",
+                "operationId": "10818cc8ea8124dc0b9c8fc849a8efed",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "age",
+                                    "address"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "name",
+                                        "type": "string",
+                                        "default": "Jiffin"
+                                    },
+                                    "age": {
+                                        "description": "age",
+                                        "type": "integer",
+                                        "default": "33"
+                                    },
+                                    "address": {
+                                        "description": "address",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User point updated successfully.",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/leader/show/{id}": {
+            "get": {
+                "tags": [
+                    "Leaderboard"
+                ],
+                "summary": "To get the details of a leader",
+                "operationId": "456af0b764f819fd9333d4d3f5bf4d2d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "leader id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Leader Details Fetched Successfully"
+                    }
+                }
+            }
+        },
+        "/api/leader/point": {
+            "post": {
+                "tags": [
+                    "Leaderboard"
+                ],
+                "summary": "To update a point of user (increment/decrement points)",
+                "operationId": "bb7a8625cfdd9737fa6827190e7a4035",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id",
+                                    "mode"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "description": "leader-board-id",
+                                        "type": "integer"
+                                    },
+                                    "mode": {
+                                        "description": "increment or decrement",
+                                        "type": "string",
+                                        "default": "increment"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User point updated successfully.",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/leader/points/reset": {
+            "get": {
+                "tags": [
+                    "Leaderboard"
+                ],
+                "summary": "To reset all users points to zero",
+                "operationId": "cf6f737982e4917aed312276cc25ceb8",
+                "responses": {
+                    "200": {
+                        "description": "Points reset successfully."
+                    }
+                }
+            }
+        },
+        "/api/leader/scores": {
+            "get": {
+                "tags": [
+                    "Leaderboard"
+                ],
+                "summary": "To group by points and show the average age of grouped users",
+                "operationId": "9d48aa1b2131a51af859ba206757da92",
+                "responses": {
+                    "200": {
+                        "description": "Group By Scores retrieved Successfully"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Leaderboard",
+            "description": "Leaderboard"
+        }
+    ]
+}

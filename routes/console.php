@@ -1,17 +1,12 @@
 <?php
 
-use App\Models\LeaderBoard;
-use App\Models\WinnerBoard;
-use Illuminate\Foundation\Inspiring;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schedule;
+use App\Http\Controllers\LeaderBoardController;
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote')->hourly();
-
-
+/**
+ * Scheduling a job that will pick winner from leaderboard and insert to winnerboard table
+ */
 Schedule::call(function (){
-    $leader = new \App\Http\Controllers\LeaderBoardController();
+    $leader = new LeaderBoardController();
     $leader->winner();
 })->everyMinute();
