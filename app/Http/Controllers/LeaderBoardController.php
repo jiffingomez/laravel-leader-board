@@ -17,7 +17,8 @@ class LeaderBoardController extends Controller
     public function index(): \Illuminate\Http\JsonResponse
     {
         $leaderboard = LeaderBoard::all('id', 'name', 'age', 'points', 'address')->sortByDesc('points');
-        return response()->json($leaderboard);
+        $collection = collect($leaderboard->values()->all());
+        return response()->json($collection);
     }
 
     /**

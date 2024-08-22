@@ -79,6 +79,7 @@
         .then(response => {
             const leaderboardData = response.data;
             // console.log(leaderboardData)
+
             // Create table rows dynamically
             for (const [key, leaderboard] of Object.entries(leaderboardData)) {
             // leaderboardData.forEach(leaderboard => {
